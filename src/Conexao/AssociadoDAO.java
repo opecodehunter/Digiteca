@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Modelo.Associado;
+import Modelo.Associado;
 
 
 public class AssociadoDAO {
@@ -16,7 +17,7 @@ public class AssociadoDAO {
 		this.conexao = new ConnectionFactory().getConnection();
 	}
 
-	public void adiciona(Associado associado) throws SQLException{
+	/*public void adiciona(Associado associado) throws SQLException{
 		try{
 			String sql = "insert into associado(RA,EMAIL,NOME,TELEFONE,TIPO) VALUES(?,?,?,?,?)";
 			PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -35,7 +36,7 @@ public class AssociadoDAO {
 		}finally{
 			conexao.close();
 		}
-	}
+	}*/
 
 	public List<Associado> getLista(){
 		try{
@@ -64,7 +65,36 @@ public class AssociadoDAO {
 		}
 	}
 
-	public void altera(Associado associado){
+	public List<Associado> getLista(String filtro,String dado) throws SQLException{
+		try{
+			List<Associado>associados=new ArrayList<Associado>();
+			String sql ="select*from associado where "+filtro+" like '"+dado+"' ";
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+
+
+			while(rs.next()){
+
+				Associado associado = new Associado();
+				associado.setRa(rs.getString("ra"));
+				associado.setEmail(rs.getString("email"));
+				associado.setNome(rs.getString("nome"));
+				associado.setTelefone(rs.getString("telefone"));
+				associado.setTipo(rs.getString("tipo"));
+
+				associados.add(associado);
+			}
+			rs.close();
+			stmt.close();
+			return associados;
+		}catch(SQLException e){
+			throw new RuntimeException(e);
+		}finally{
+			conexao.close();
+		}
+	}
+
+/*	public void altera(Associado associado){
 		String sql = "update associado set ra=?, email=?, nome=?, telefone=?, tipo=?";
 		try{
 			PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -79,9 +109,9 @@ public class AssociadoDAO {
 		}catch(SQLException e){
 			throw new RuntimeException(e);
 		}
-	}
+	}*/
 
-	public void remove(Associado associado){
+ public void remove(Associado associado){
 		try{
 			PreparedStatement stmt = conexao.prepareStatement("delete from contatos where RA=?");
 			stmt.setString(1,associado.getRa());

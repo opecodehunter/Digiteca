@@ -17,15 +17,15 @@ public class LivroDAO {
 		this.conexao = new ConnectionFactory().getConnection();
 	}
 
-	public void adiciona(Livro livro) throws SQLException{
+	/*public void adiciona(Livro livro) throws SQLException{
 		try{
-			String sql = "insert into livro(titulo,autor,isbn,editora,tombo)values(?????)";
+			String sql = "insert into livro(id_livro,autor,editora,isbn,titulo)values(?????)";
 			PreparedStatement stmt = conexao.prepareStatement(sql);
-			stmt.setString(1,livro.getTitulo());
+			stmt.setString(1,livro.getTombo());
 			stmt.setString(2,livro.getAutor());
-			stmt.setString(3,livro.getISBN());
-			stmt.setString(4,livro.getEditora());
-			stmt.setString(5,livro.getTombo());
+			stmt.setString(3,livro.getEditora());
+			stmt.setString(4,livro.getISBN());
+			stmt.setString(5,livro.getTitulo());
 
 			stmt.execute();
 			stmt.close();
@@ -36,6 +36,9 @@ public class LivroDAO {
 			conexao.close();
 		}
 	}
+	 */
+
+	//lista os livros da tabela.
 
 	public List<Livro> getLista() throws SQLException{
 		try{
@@ -52,7 +55,7 @@ public class LivroDAO {
 				livro.setAutor(rs.getString("autor"));
 				livro.setISBN(rs.getString("isbn"));
 				livro.setEditora(rs.getString("editora"));
-				livro.setTombo(rs.getString("tombo"));
+				livro.setTombo(rs.getString("id_livro"));
 
 				livros.add(livro);
 			}
@@ -66,7 +69,38 @@ public class LivroDAO {
 		}
 	}
 
-	public void altera(Livro livro) throws SQLException{
+	public List<Livro> getLista(String filtro,String dado) throws SQLException{
+		try{
+			List<Livro>livros=new ArrayList<Livro>();
+			String sql ="select*from livro where "+filtro+" like '"+dado+"' ";
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+
+
+			while(rs.next()){
+
+				Livro livro = new Livro();
+				livro.setTitulo(rs.getString("titulo"));
+				livro.setAutor(rs.getString("autor"));
+				livro.setISBN(rs.getString("isbn"));
+				livro.setEditora(rs.getString("editora"));
+				livro.setTombo(rs.getString("id_livro"));
+
+				livros.add(livro);
+			}
+			rs.close();
+			stmt.close();
+			return livros;
+		}catch(SQLException e){
+			throw new RuntimeException(e);
+		}finally{
+			conexao.close();
+		}
+	}
+
+
+
+	/* public void altera(Livro livro) throws SQLException{
 		String sql = "update livro set ra=?, email=?, nome=?, telefone=?, tipo=?";
 		try{
 			PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -98,4 +132,6 @@ public class LivroDAO {
 		}
 
 	}
+	 */
+
 }
