@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Modelo.Associado;
-import Modelo.Associado;
-
 
 public class AssociadoDAO {
 	Connection conexao;
@@ -17,7 +15,7 @@ public class AssociadoDAO {
 		this.conexao = new ConnectionFactory().getConnection();
 	}
 
-	/*public void adiciona(Associado associado) throws SQLException{
+	public void adiciona(Associado associado) throws SQLException{
 		try{
 			String sql = "insert into associado(RA,EMAIL,NOME,TELEFONE,TIPO) VALUES(?,?,?,?,?)";
 			PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -36,7 +34,7 @@ public class AssociadoDAO {
 		}finally{
 			conexao.close();
 		}
-	}*/
+	}
 
 	public List<Associado> getLista(){
 		try{
