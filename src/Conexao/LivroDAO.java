@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Modelo.Associado;
 import Modelo.Livro;
 
 public class LivroDAO {
@@ -17,11 +16,11 @@ public class LivroDAO {
 		this.conexao = new ConnectionFactory().getConnection();
 	}
 
-	/*public void adiciona(Livro livro) throws SQLException{
+	public void adiciona(Livro livro) throws SQLException{
 		try{
 			String sql = "insert into livro(id_livro,autor,editora,isbn,titulo)values(?????)";
 			PreparedStatement stmt = conexao.prepareStatement(sql);
-			stmt.setString(1,livro.getTombo());
+			stmt.setInt(1,livro.getTombo());
 			stmt.setString(2,livro.getAutor());
 			stmt.setString(3,livro.getEditora());
 			stmt.setString(4,livro.getISBN());
@@ -36,7 +35,6 @@ public class LivroDAO {
 			conexao.close();
 		}
 	}
-	 */
 
 	//lista os livros da tabela.
 
@@ -55,7 +53,7 @@ public class LivroDAO {
 				livro.setAutor(rs.getString("autor"));
 				livro.setISBN(rs.getString("isbn"));
 				livro.setEditora(rs.getString("editora"));
-				livro.setTombo(rs.getString("id_livro"));
+				livro.setTombo(rs.getInt("id_livro"));
 
 				livros.add(livro);
 			}
@@ -84,7 +82,7 @@ public class LivroDAO {
 				livro.setAutor(rs.getString("autor"));
 				livro.setISBN(rs.getString("isbn"));
 				livro.setEditora(rs.getString("editora"));
-				livro.setTombo(rs.getString("id_livro"));
+				livro.setTombo(rs.getInt("id_livro"));
 
 				livros.add(livro);
 			}

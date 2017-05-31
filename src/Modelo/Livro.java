@@ -8,7 +8,7 @@ public class Livro {
 	private String Autor;
 	private String ISBN;
 	private String Editora;
-	private String tombo;
+	private int tombo;
 	
 	List<Livro> exemplares = new ArrayList<>();
 	
@@ -46,11 +46,11 @@ public class Livro {
 		Editora = editora;
 	}
 
-	public String getTombo() {
+	public int getTombo() {
 		return tombo;
 	}
 
-	public void setTombo(String tombo) {
+	public void setTombo(int tombo) {
 		this.tombo = tombo;
 	}
 	
