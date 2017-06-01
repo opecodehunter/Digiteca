@@ -9,17 +9,16 @@ public class Emprestimo {
 	Livro livro;
 	String status;
 
-	
+	public Emprestimo(){
+		this.status ="ATIVO";
+	}
+
 	public String getStatus() {
 		return status;
 	}
 
 	public void setStatus(String status) {
 		this.status = status;
-	}
-
-	public Emprestimo(){
-		this.status ="ATIVO";
 	}
 
 	public int getId() {
@@ -53,7 +52,7 @@ public class Emprestimo {
 	public void setAssociado(Associado associado2) {
 		this.associado = associado2;
 	}
-	
+
 	public Livro getLivro() {
 		return livro;
 	}
@@ -61,5 +60,5 @@ public class Emprestimo {
 	public void setLivro(Livro livro) {
 		this.livro = livro;
 	}
-	
+
 }

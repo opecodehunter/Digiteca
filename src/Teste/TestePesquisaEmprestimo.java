@@ -14,7 +14,7 @@ public class TestePesquisaEmprestimo {
 
 		EmprestimoDAO dao= new EmprestimoDAO();
 
-		List<Emprestimo> emprestimos = dao.getLista();
+		List<Emprestimo> emprestimos = dao.getLista(null);
 
 		if(emprestimos.size() > 0){
 			for(Emprestimo emprestimo : emprestimos){

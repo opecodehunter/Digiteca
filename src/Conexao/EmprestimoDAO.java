@@ -31,11 +31,11 @@ public class EmprestimoDAO {
 			stmt.setDate(2,dataSaidaAdd);
 			stmt.setString(3,emprestimo.getAssociado().getRa());
 			stmt.setInt(4,emprestimo.getLivro().getTombo());
-
-
+			
 			stmt.execute();
 			stmt.close();
 			System.out.println("Dados inseridos com sucesso!!!");
+			
 		}catch(SQLException sqle){
 			System.out.println("Não foi possivel inserir os dados!!!");
 		}finally{
