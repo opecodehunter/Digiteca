@@ -8,7 +8,9 @@ public class Livro {
 	private int tombo;
 	private String status;
 	
-
+	public Livro(){
+		this.status = "DISPONIVEL";
+	}
 	
 	public String getStatus() {
 		return status;
@@ -17,8 +19,6 @@ public class Livro {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
-	public Livro(){}
 
 	public String getTitulo() {
 		return titulo;

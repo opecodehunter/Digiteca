@@ -98,18 +98,16 @@ public class LivroDAO {
 
 
 
-	/* public void altera(Livro livro) throws SQLException{
-		String sql = "update livro set ra=?, email=?, nome=?, telefone=?, tipo=?";
+	 public void alteraStatus(int livro) throws SQLException{
+		String sql = "UPDATE LIVRO SET STATUSLIVRO=? WHERE ID_LIVRO = "+livro;
 		try{
 			PreparedStatement stmt = conexao.prepareStatement(sql);
-			stmt.setString(1, livro.getTitulo());
-			stmt.setString(2, livro.getAutor());
-			stmt.setString(3, livro.getISBN());
-			stmt.setString(4, livro.getEditora());
-			stmt.setString(5, livro.getTombo());
-
+			stmt.setString(1,"EMPRESTADO");
+	
 			stmt.execute();
 			stmt.close();
+			
+			System.out.println("Dados alterados!!!");
 		}catch(SQLException e){
 			throw new RuntimeException(e);
 		}finally{
@@ -117,7 +115,7 @@ public class LivroDAO {
 		}
 	}
 
-	public void remove(Associado associado) throws SQLException{
+	/*public void remove(Associado associado) throws SQLException{
 		try{
 			PreparedStatement stmt = conexao.prepareStatement("delete from contatos where RA=?");
 			stmt.setString(1,associado.getRa());
@@ -129,7 +127,6 @@ public class LivroDAO {
 			conexao.close();
 		}
 
-	}
-	 */
+	}*/
 
 }

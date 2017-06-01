@@ -41,6 +41,8 @@ public class RegistrarEmprestimo {
 		livro.setISBN(livros.get(0).getISBN());
 		livro.setTombo(livros.get(0).getTombo());
 		
+		UpdateLivro.AtualizarLivro(5);
+		
 		//Configura a data do emprestimo
 		
 		Calendar dataSaida = Calendar.getInstance();
@@ -51,6 +53,8 @@ public class RegistrarEmprestimo {
  		
  		Emprestimo emprestimo = new Emprestimo();
  		
+ 		//livrodao.alteraStatus(3);
+ 		
  		emprestimo.setAssociado(associado);
  		emprestimo.setDataPrevista(dataPrevista);
  		emprestimo.setDataSaida(dataSaida);
@@ -59,5 +63,6 @@ public class RegistrarEmprestimo {
  		EmprestimoDAO emprestimodao = new EmprestimoDAO();
  		
  		emprestimodao.adiciona(emprestimo);
+ 		
 	}
 }
