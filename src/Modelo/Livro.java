@@ -1,17 +1,23 @@
 package Modelo;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Livro {
 	private String titulo;
 	private String Autor;
 	private String ISBN;
 	private String Editora;
 	private int tombo;
+	private String status;
 	
-	List<Livro> exemplares = new ArrayList<>();
+
 	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public Livro(){}
 
 	public String getTitulo() {

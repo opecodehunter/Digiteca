@@ -9,9 +9,6 @@ import Modelo.Associado;
 public class TestePesquisaAssociado {
 	public static void main(String[]args) throws SQLException{
 
-
-		//Pesquisa de livro com filtro;
-
 		AssociadoDAO dao= new AssociadoDAO();
 		String dado = "1600364";
 		String filtro = "ra";
@@ -29,7 +26,7 @@ public class TestePesquisaAssociado {
 		}else{
 			System.out.println("Associado não encontrado");
 		}
-		//Pesquisa de Livro 
+
 
 	}
 }

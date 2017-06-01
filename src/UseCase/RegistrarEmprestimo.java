@@ -11,7 +11,7 @@ import Modelo.Associado;
 import Modelo.Emprestimo;
 import Modelo.Livro;
 
-public class NovoEmprestimo {
+public class RegistrarEmprestimo {
 
 	public static void novo(String ra,String tombo) throws SQLException{
 		

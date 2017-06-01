@@ -6,7 +6,7 @@ import java.util.List;
 import Conexao.LivroDAO;
 import Modelo.Livro;
 
-public class PesquisarLivro {
+public class ConsultarLivro {
 
 	public static void pesquisaLivro(){
 

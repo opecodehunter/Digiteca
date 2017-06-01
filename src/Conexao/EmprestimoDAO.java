@@ -8,19 +8,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
 import Modelo.Associado;
 import Modelo.Emprestimo;
 import Modelo.Livro;
 
 public class EmprestimoDAO {
-	
+
 	Connection conexao;
-		
+
 	public EmprestimoDAO(){
 		this.conexao = new ConnectionFactory().getConnection();
 	}
-	
+
 	public void adiciona(Emprestimo emprestimo) throws SQLException{
 		try{
 			String sql = "insert into emprestimo(DATAPREVISTA,DATASAIDA,RA_ASSOCIADO,ID_LIVRO) VALUES(?,?,?,?)";
@@ -43,8 +42,7 @@ public class EmprestimoDAO {
 			conexao.close();
 		}
 	}
-	
-	
+
 	public List<Emprestimo> getLista(String dado) throws SQLException{
 		try{
 			List<Emprestimo>emprestimos=new ArrayList<Emprestimo>();
@@ -56,25 +54,29 @@ public class EmprestimoDAO {
 			while(rs.next()){
 
 				Emprestimo emprestimo = new Emprestimo();
-				
+
 				emprestimo.setId(rs.getInt("id_emprestimo"));
-				
-				String Ra = rs.getString(("ra_associado"));
+
+				String Ra = rs.getString("ra_associado");
 				AssociadoDAO dao = new AssociadoDAO();
 				List<Associado> associados = dao.getLista("ra",Ra);
 				emprestimo.setAssociado(associados.get(0));
-					
-				
+
+				String id_livro = ""+rs.getInt("id_livro");
+				LivroDAO livrodao = new LivroDAO();
+				List<Livro> livros = livrodao.getLista("id_livro",id_livro);
+				emprestimo.setLivro(livros.get(0));
+
 				//setDataSaida
 				Calendar dataSaida = Calendar.getInstance();
 				dataSaida.setTime(rs.getDate("dataSaida"));
 				emprestimo.setDataSaida(dataSaida);
-				
+
 				//setDataPrevista
 				Calendar dataPrevista = Calendar.getInstance();
 				dataSaida.setTime(rs.getDate("dataSaida"));
 				emprestimo.setDataPrevista(dataPrevista);
-		
+
 				emprestimos.add(emprestimo);
 			}
 			rs.close();
@@ -84,6 +86,26 @@ public class EmprestimoDAO {
 			throw new RuntimeException(e);
 		}finally{
 			conexao.close();
+		}
+	}
+
+	public void altera(Emprestimo emprestimo){
+		String sql = "update emprestimo SET DATAPREVISTA=?, DATASAIDA=?,ID_EMPRESTIMO=?,ID_LIVRO=?,RA_ASSOCIADO=?,STATUSEMP=?";
+		try{
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			Date dataPrevistaAdd = new Date(emprestimo.getDataPrevista().getTimeInMillis());
+			Date dataSaidaAdd = new Date(emprestimo.getDataSaida().getTimeInMillis());
+			stmt.setDate(1, dataPrevistaAdd);
+			stmt.setDate(2, dataSaidaAdd);
+			stmt.setInt(3, emprestimo.getId());
+			stmt.setString(4, emprestimo.getAssociado().getRa());
+			stmt.setInt(5, emprestimo.getLivro().getTombo());
+			stmt.setString(6, emprestimo.getStatus());
+
+			stmt.execute();
+			stmt.close();
+		}catch(SQLException e){
+			throw new RuntimeException(e);
 		}
 	}
 }

@@ -8,7 +8,7 @@ import java.util.List;
 import Conexao.EmprestimoDAO;
 import Modelo.Emprestimo;
 
-public class PesquisarEmprestimo {
+public class ConsultarEmprestimo {
 
 
 	public static void buscarEmprestimo(String ra) throws SQLException{
@@ -28,8 +28,6 @@ public class PesquisarEmprestimo {
 						+ "Livro: "+emprestimo.getLivro().getTitulo()+" | "
 						+ "DataSaida: "+sdf.format(dataSaidaformat)+" | "
 						+ "DataPrevista: "+sdf.format(dataPrevistaformat)+" | ");
-
-				
 			}
 		}else{
 			System.out.println("Emprestimo não encontrado");
