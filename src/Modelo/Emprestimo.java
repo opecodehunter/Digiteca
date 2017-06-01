@@ -1,6 +1,4 @@
 package Modelo;
-
-import java.sql.Date;
 import java.util.Calendar;
 
 public class Emprestimo {
@@ -9,9 +7,20 @@ public class Emprestimo {
 	Calendar dataPrevista;
 	Associado associado;
 	Livro livro;
+	String status;
 
 	
-	public Emprestimo(){}
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Emprestimo(){
+		this.status ="ATIVO";
+	}
 
 	public int getId() {
 		return id;
@@ -52,7 +61,5 @@ public class Emprestimo {
 	public void setLivro(Livro livro) {
 		this.livro = livro;
 	}
-
-	
 	
 }
